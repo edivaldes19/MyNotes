@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">My Notes</string>
+    <string name="hint_description">Write your note here…</string>
+    <string name="dialog_title">Delete note?</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="validation_field_required">This field is required</string>
+    <string name="notes_pending">Slopes:</string>
+    <string name="notes_finished">Finished:</string>
+    <string name="edit">Edit</string>
+    <string name="edit_text">Edit text</string>
+    <string name="note_added">Note added.</string>
+    <string name="note_updated">Updated note.</string>
+    <string name="note_removed">Note removed.</string>
+    <string name="error_adding_note">Error adding note.</string>
+    <string name="failed_to_update_note">Failed to update note.</string>
+    <string name="failed_to_delete_note">Failed to delete note.</string>
+</resources>

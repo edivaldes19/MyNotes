@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mis Notas</string>
+    <string name="hint_description">Escribe aquí tu nota…</string>
+    <string name="dialog_title">¿Eliminar nota?</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="validation_field_required">Este campo es obligatorio.</string>
+    <string name="notes_pending">Pendientes:</string>
+    <string name="notes_finished">Terminadas:</string>
+    <string name="edit">Editar</string>
+    <string name="edit_text">Editar texto</string>
+    <string name="note_added">Nota agregada.</string>
+    <string name="note_updated">Nota actualizada.</string>
+    <string name="note_removed">Nota eliminada.</string>
+    <string name="error_adding_note">Error al agregar la nota.</string>
+    <string name="failed_to_update_note">Error al actualizar la nota.</string>
+    <string name="failed_to_delete_note">Error al eliminar la nota.</string>
+</resources>
