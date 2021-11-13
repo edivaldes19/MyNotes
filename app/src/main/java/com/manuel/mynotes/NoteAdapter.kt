@@ -1,5 +1,6 @@
 package com.manuel.mynotes
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -63,6 +64,12 @@ class NoteAdapter(private var noteList: MutableList<Note>, private val listener:
             noteList.removeAt(index)
             notifyItemRemoved(index)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: MutableList<Note>) {
+        noteList = list
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">My Notes</string>
     <string name="hint_description">Write your note here…</string>
+    <string name="hint_description_new">Write the new text here…</string>
     <string name="dialog_title">Delete note?</string>
     <string name="dialog_delete">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="validation_field_required">This field is required</string>
-    <string name="notes_pending">Pending notes:</string>
-    <string name="notes_made">Notes made:</string>
+    <string name="notes_pending">Pending notes</string>
+    <string name="notes_made">Notes made</string>
     <string name="edit">Edit</string>
     <string name="edit_text">Edit text</string>
     <string name="note_added">Note added.</string>
@@ -15,4 +16,8 @@
     <string name="error_adding_note">Error adding note.</string>
     <string name="failed_to_update_note">Failed to update note.</string>
     <string name="failed_to_delete_note">Failed to delete note.</string>
+    <string name="find_note">Find note…</string>
+    <string name="no_search_results">No search results.</string>
+    <string name="search_for_pending">Search for pending</string>
+    <string name="search_for_performed">Search for performed</string>
 </resources>

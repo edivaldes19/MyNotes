@@ -3,13 +3,18 @@ package com.manuel.mynotes
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 import com.manuel.mynotes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnClickListener {
@@ -17,6 +22,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     private lateinit var pendingNotesAdapter: NoteAdapter
     private lateinit var madeNotesAdapter: NoteAdapter
     private lateinit var crud: CRUD
+    private var listOfAllNotes = mutableListOf<Note>()
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MyNotes)
         super.onCreate(savedInstanceState)
@@ -30,6 +36,51 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     override fun onStart() {
         super.onStart()
         getAllNotes()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        val menuItem = menu?.findItem(R.id.action_search)
+        val searchView = menuItem?.actionView as SearchView
+        searchView.queryHint = getString(R.string.find_note)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                getAllNotes()
+                val filteredList = mutableListOf<Note>()
+                if (menu.findItem(R.id.searchForPending).isChecked) {
+                    filterItems(
+                        listOfAllNotes,
+                        filteredList,
+                        newText,
+                        binding.tvNoPendingResults,
+                        pendingNotesAdapter,
+                        false
+                    )
+                } else if (menu.findItem(R.id.searchForPerformed).isChecked) {
+                    filterItems(
+                        listOfAllNotes,
+                        filteredList,
+                        newText,
+                        binding.tvNoResultsInPerformed,
+                        madeNotesAdapter,
+                        true
+                    )
+                }
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.searchForPending, R.id.searchForPerformed -> {
+                item.isChecked = !item.isChecked
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onChecked(note: Note) {
@@ -51,7 +102,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         val builder = MaterialAlertDialogBuilder(this)
         builder.setTitle(getString(R.string.edit_text))
         val editText = TextInputEditText(this)
-        editText.hint = getString(R.string.hint_description)
+        editText.hint = getString(R.string.hint_description_new)
         editText.filters = arrayOf<InputFilter>(LengthFilter(50))
         editText.maxLines = 2
         val params = LinearLayout.LayoutParams(
@@ -60,6 +111,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         )
         params.setMargins(40, 20, 40, 20)
         editText.layoutParams = params
+        editText.setText(note.description)
         val container = RelativeLayout(this)
         val relativeParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -100,6 +152,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     override fun onLongClick(note: Note, currentAdapter: NoteAdapter) {
         val builder = MaterialAlertDialogBuilder(this).setTitle(getString(R.string.dialog_title))
+            .setMessage(note.description)
             .setPositiveButton(getString(R.string.dialog_delete)) { _, _ ->
                 if (crud.delete(note)) {
                     currentAdapter.delete(note)
@@ -163,8 +216,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun getAllNotes() {
-        val data = crud.read()
-        data.forEach { note -> addNoteOnTheList(note) }
+        listOfAllNotes = crud.read()
+        listOfAllNotes.forEach { note -> addNoteOnTheList(note) }
     }
 
     private fun addNoteOnTheList(note: Note) {
@@ -188,6 +241,32 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             pendingNotesAdapter.delete(note)
         } else {
             madeNotesAdapter.delete(note)
+        }
+    }
+
+    private fun filterItems(
+        completeList: MutableList<Note>,
+        filteredList: MutableList<Note>,
+        text: String?,
+        textView: MaterialTextView,
+        currentAdapter: NoteAdapter,
+        isDone: Boolean
+    ) {
+        for (note in completeList) {
+            if (text!!.lowercase() in note.description.lowercase() && if (isDone) {
+                    note.isDone
+                } else {
+                    !note.isDone
+                }
+            ) {
+                filteredList.add(note)
+            }
+        }
+        currentAdapter.updateList(filteredList)
+        textView.visibility = if (filteredList.isNullOrEmpty()) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 }

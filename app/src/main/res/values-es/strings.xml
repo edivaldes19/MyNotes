@@ -2,12 +2,13 @@
 <resources>
     <string name="app_name">Mis Notas</string>
     <string name="hint_description">Escribe aquí tu nota…</string>
+    <string name="hint_description_new">Escríbe aquí el nuevo texto…</string>
     <string name="dialog_title">¿Eliminar nota?</string>
     <string name="dialog_delete">Eliminar</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="validation_field_required">Este campo es obligatorio.</string>
-    <string name="notes_pending">Notas pendientes:</string>
-    <string name="notes_made">Notas terminadas:</string>
+    <string name="notes_pending">Notas pendientes</string>
+    <string name="notes_made">Notas realizadas</string>
     <string name="edit">Editar</string>
     <string name="edit_text">Editar texto</string>
     <string name="note_added">Nota agregada.</string>
@@ -16,4 +17,8 @@
     <string name="error_adding_note">Error al agregar la nota.</string>
     <string name="failed_to_update_note">Error al actualizar la nota.</string>
     <string name="failed_to_delete_note">Error al eliminar la nota.</string>
+    <string name="find_note">Buscar nota…</string>
+    <string name="no_search_results">Sin resultados de búsqueda.</string>
+    <string name="search_for_pending">Buscar por pendientes</string>
+    <string name="search_for_performed">Buscar por realizadas</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -52,9 +53,20 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/common_padding_default"
+            android:padding="@dimen/common_padding_default"
             android:text="@string/notes_pending"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNoPendingResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_padding_min"
+            android:text="@string/no_search_results"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNotes"
@@ -65,9 +77,20 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/common_padding_default"
+            android:padding="@dimen/common_padding_default"
             android:text="@string/notes_made"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNoResultsInPerformed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/common_padding_min"
+            android:text="@string/no_search_results"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNotesFinished"
