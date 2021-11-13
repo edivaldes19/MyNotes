@@ -3,11 +3,11 @@
     <string name="app_name">Mis Notas</string>
     <string name="hint_description">Escribe aquí tu nota…</string>
     <string name="dialog_title">¿Eliminar nota?</string>
-    <string name="dialog_ok">OK</string>
+    <string name="dialog_delete">Eliminar</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="validation_field_required">Este campo es obligatorio.</string>
-    <string name="notes_pending">Pendientes:</string>
-    <string name="notes_finished">Terminadas:</string>
+    <string name="notes_pending">Notas pendientes:</string>
+    <string name="notes_made">Notas terminadas:</string>
     <string name="edit">Editar</string>
     <string name="edit_text">Editar texto</string>
     <string name="note_added">Nota agregada.</string>

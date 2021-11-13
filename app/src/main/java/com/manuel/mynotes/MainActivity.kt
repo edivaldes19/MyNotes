@@ -14,8 +14,8 @@ import com.manuel.mynotes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var notesAdapter: NoteAdapter
-    private lateinit var notesMadeAdapter: NoteAdapter
+    private lateinit var pendingNotesAdapter: NoteAdapter
+    private lateinit var madeNotesAdapter: NoteAdapter
     private lateinit var crud: CRUD
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MyNotes)
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     override fun onLongClick(note: Note, currentAdapter: NoteAdapter) {
         val builder = MaterialAlertDialogBuilder(this).setTitle(getString(R.string.dialog_title))
-            .setPositiveButton(getString(R.string.dialog_ok)) { _, _ ->
+            .setPositiveButton(getString(R.string.dialog_delete)) { _, _ ->
                 if (crud.delete(note)) {
                     currentAdapter.delete(note)
                     Snackbar.make(
@@ -120,21 +120,27 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun setupRecyclerViews() {
-        notesAdapter = NoteAdapter(mutableListOf(), this)
+        pendingNotesAdapter = NoteAdapter(mutableListOf(), this)
         binding.rvNotes.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = notesAdapter
+            adapter = pendingNotesAdapter
         }
-        notesMadeAdapter = NoteAdapter(mutableListOf(), this)
+        madeNotesAdapter = NoteAdapter(mutableListOf(), this)
         binding.rvNotesFinished.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = notesMadeAdapter
+            adapter = madeNotesAdapter
         }
     }
 
     private fun setupButton() {
         binding.btnAdd.setOnClickListener {
-            if (binding.etDescription.text.toString().trim().isNotEmpty()) {
+            if (binding.etDescription.text.toString().trim().isEmpty()) {
+                binding.tilDescription.run {
+                    error = getString(R.string.validation_field_required)
+                    requestFocus()
+                }
+            } else {
+                binding.tilDescription.error = null
                 val note = Note(description = binding.etDescription.text.toString().trim())
                 note.id = crud.create(note)
                 if (note.id != Constants.ID_ERROR) {
@@ -152,8 +158,6 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
-            } else {
-                binding.etDescription.error = getString(R.string.validation_field_required)
             }
         }
     }
@@ -165,25 +169,25 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     private fun addNoteOnTheList(note: Note) {
         if (note.isDone) {
-            notesMadeAdapter.add(note)
+            madeNotesAdapter.add(note)
         } else {
-            notesAdapter.add(note)
+            pendingNotesAdapter.add(note)
         }
     }
 
     private fun updateNoteOnTheList(note: Note) {
         if (note.isDone) {
-            notesMadeAdapter.update(note)
+            madeNotesAdapter.update(note)
         } else {
-            notesAdapter.update(note)
+            pendingNotesAdapter.update(note)
         }
     }
 
     private fun deleteNoteOnTheList(note: Note) {
         if (note.isDone) {
-            notesAdapter.delete(note)
+            pendingNotesAdapter.delete(note)
         } else {
-            notesMadeAdapter.delete(note)
+            madeNotesAdapter.delete(note)
         }
     }
 }

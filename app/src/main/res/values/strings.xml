@@ -2,11 +2,11 @@
     <string name="app_name">My Notes</string>
     <string name="hint_description">Write your note here…</string>
     <string name="dialog_title">Delete note?</string>
-    <string name="dialog_ok">OK</string>
+    <string name="dialog_delete">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="validation_field_required">This field is required</string>
-    <string name="notes_pending">Slopes:</string>
-    <string name="notes_finished">Finished:</string>
+    <string name="notes_pending">Pending notes:</string>
+    <string name="notes_made">Notes made:</string>
     <string name="edit">Edit</string>
     <string name="edit_text">Edit text</string>
     <string name="note_added">Note added.</string>

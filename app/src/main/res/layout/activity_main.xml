@@ -19,10 +19,11 @@
             android:padding="@dimen/common_padding_default">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDescription"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="100"
+                android:layout_weight="1"
                 android:hint="@string/hint_description"
                 app:counterEnabled="true"
                 app:counterMaxLength="@integer/description_max_length">
@@ -65,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/common_padding_default"
-            android:text="@string/notes_finished"
+            android:text="@string/notes_made"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <androidx.recyclerview.widget.RecyclerView
